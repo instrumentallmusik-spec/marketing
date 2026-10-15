@@ -1,0 +1,31 @@
+Día,Semana,Canal,Producto,Acción,Formato,CTA,Material o datos pendientes,Indicador,Estado
+1,1,Interno,Todos,"Reunir catálogo y verificar datos",Ficha,"—","Fotos reales, medidas, materiales, precios, stock, despacho",Fichas completadas,Planificado
+2,1,Web,Todos,"Probar páginas y vías de contacto",Auditoría,"Solicitar cotización","Acceso a web y canales oficiales",Contactos probados,Planificado
+3,1,SEO,Todos,"Auditar títulos y metadescripciones",Tabla SEO,"—","URLs y textos actuales",Páginas auditadas,Planificado
+4,1,Comercial,Todos,"Preparar plantilla de respuesta",Plantilla,"Cotizar","Canales y horarios confirmados",Plantilla aprobada,Planificado
+5,1,B2B,Todos,"Crear lista de 20 prospectos relevantes",Prospección,"Solicitar conversación comercial","Empresas y contactos públicos verificados",Prospectos,Planificado
+6,1,Instagram/Facebook,Paños nuevos,"Cómo elegir un paño según el trabajo",Carrusel,"Solicita cotización","Usos confirmados y fotos reales",Consultas y guardados,Planificado
+7,1,Interno,Todos,"Revisar resultados y faltantes",Revisión,"—","Registro de consultas",Tareas cerradas,Planificado
+8,2,Web/SEO,Paños nuevos,"Mejorar ficha del producto",Página web,"Consultar precio por volumen","Composición, medidas, usos y fotos",Ficha validada,Planificado
+9,2,IA visual,Paños nuevos,"Crear imagen cuadrada y vertical",Imágenes,"—","Foto real de referencia",Piezas aprobadas,Planificado
+10,2,Reels/TikTok,Paños nuevos,"Mostrar textura y formato real",Video vertical,"Cotiza por mensaje","Video real y datos confirmados",Consultas,Planificado
+11,2,Web/SEO,Huaipe mecánico,"Completar ficha de producto",Página web,"Solicitar cotización","Tipo exacto, presentación y usos",Ficha validada,Planificado
+12,2,Instagram/Facebook,Huaipe mecánico,"Qué indicar al cotizar",Carrusel,"Consulta por tu cantidad","Datos del producto",Clics y consultas,Planificado
+13,2,B2B,Todos,"Contactar 5 prospectos individualmente",Correo/mensaje,"Solicitar conversación","Catálogo y contacto comercial",Respuestas,Planificado
+14,2,Interno,Todos,"Revisar primera quincena",Reporte,"—","Datos de consultas",Cotizaciones,Planificado
+15,3,Web/SEO,Paños no tejidos,"Validar ficha y usos",Página web,"Solicitar cotización","Medidas, composición y presentación",Ficha validada,Planificado
+16,3,IA visual,Paños no tejidos,"Crear imagen de textura y formato",Imagen,"—","Foto real y diferencias verificadas",Pieza aprobada,Planificado
+17,3,Reels/TikTok,Paños no tejidos,"Video de presentación del producto",Video vertical,"Cotiza con Igmaustral","Video real y características",Consultas,Planificado
+18,3,B2B,Todos,"Contactar otros 5 prospectos",Correo/mensaje,"Consultar abastecimiento","Prospectos relevantes",Respuestas,Planificado
+19,3,Web/SEO,Absorción hidrocarburos,"Validar información técnica",Página web,"Solicitar ficha y cotización","Compatibilidad, limitaciones y datos técnicos",Ficha validada,Planificado
+20,3,Video,Absorción hidrocarburos,"Preparar guion seguro y veraz",Guion/video,"Consultar especificaciones","Evidencia técnica para toda afirmación de rendimiento",Guion aprobado,Planificado
+21,3,Instagram/Facebook,Absorción hidrocarburos,"Publicar contenido verificado",Carrusel/video,"Solicita cotización","Foto real y afirmaciones verificadas",Consultas cualificadas,Planificado
+22,4,Web,Todos,"Simplificar contacto móvil",Mejora UX,"Contactar","Prueba de formulario, WhatsApp, correo y teléfono",Pruebas completas,Planificado
+23,4,Web/redes,Todos,"Publicar preguntas frecuentes",FAQ,"Consulta por tu necesidad","Respuestas comerciales confirmadas",Consultas,Planificado
+24,4,B2B,Todos,"Contactar 5 prospectos y dar seguimiento",Prospección,"Solicitar cotización","Lista y seguimiento individual",Respuestas y cotizaciones,Planificado
+25,4,Instagram/Facebook,Todos,"Explicar cómo cotizar por volumen",Publicación,"Pide cotización mayorista","Mínimos y condiciones confirmados",Consultas mayoristas,Planificado
+26,4,Reels/TikTok,Todos,"Video de presentación de varias líneas",Video vertical,"Contacta a Igmaustral","Fotos/videos reales",Consultas,Planificado
+27,4,Analítica,Todos,"Registrar datos disponibles",Reporte,"—","Estadísticas web y registro comercial",Línea base,Planificado
+28,4,Comercial,Todos,"Seguimiento a cotizaciones abiertas",Mensajes individuales,"Resolver dudas","Estado de cotizaciones",Cotizaciones reactivadas,Planificado
+29,4,Interno,Todos,"Comparar resultados por producto",Reporte,"—","Datos de visitas, consultas y ventas",Informe mensual,Planificado
+30,4,Interno,Todos,"Definir plan del segundo mes",Planificación,"—","Resultados del mes",Plan siguiente,Planificado

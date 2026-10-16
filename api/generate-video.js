@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         image_url: imageData,
         prompt: (typeof prompt === "string" && prompt.trim()) ? prompt.trim().slice(0, 1200) : "A subtle slow camera push-in on the exact original industrial cleaning cloth. Preserve its color, weave, fibers, shape and proportions. Realistic workshop lighting, no redesign, no text, no logos.",
-        duration: "5", resolution: "720p", aspect_ratio: "9:16"
+        duration: "5", resolution: "720p", negative_prompt: "distorted cloth, altered fabric weave, changed color, warped product, extra products, text, watermark"
       })
     });
     const data = await response.json().catch(() => ({}));

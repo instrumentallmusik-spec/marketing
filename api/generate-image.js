@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   if (typeof imageData !== "string" || !imageData.startsWith("data:image/")) {
     return res.status(400).json({ error: "Sube una fotografía JPG, PNG o WebP válida." });
   }
-  if (imageData.length > 5_500_000) {
+  if (imageData.length > 4_000_000) {
     return res.status(413).json({ error: "La imagen sigue siendo demasiado grande. Prueba con una foto más pequeña." });
   }
   try {

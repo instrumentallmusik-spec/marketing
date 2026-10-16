@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Estudio de contenido con IA para fotografías y videos de producto de Igmaustral.">
+<meta name="theme-color" content="#102a43">
+<title>Igmaustral | Estudio de contenido IA</title>
+<style>
+:root{--navy:#102a43;--blue:#176b87;--teal:#2a9d8f;--ink:#182b3a;--muted:#657786;--paper:#f4f7f9;--line:#dce5eb;--white:#fff;--gold:#e9b44c;--red:#9f2d2d}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}.wrap{max-width:1120px;margin:auto;padding:22px}.hero{background:linear-gradient(120deg,#102a43,#176b87);color:white;border-radius:22px;padding:28px}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:.75rem;font-weight:800;color:#b9e6e8}.hero h1{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:9px 0}.hero p{color:#e1edf2;max-width:720px}.btn{border:0;border-radius:10px;padding:11px 15px;font:inherit;font-weight:750;cursor:pointer;display:inline-flex;justify-content:center;align-items:center;text-decoration:none}.primary{background:var(--navy);color:white}.light{background:white;color:var(--navy)}.outline{background:white;border:1px solid var(--line);color:var(--ink)}.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:18px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:19px;box-shadow:0 4px 16px #15324a08}.card h2{margin:0 0 5px;font-size:1.2rem}.muted{color:var(--muted);font-size:.9rem}.field{display:grid;gap:6px;margin-top:14px}.field label{font-weight:750;font-size:.9rem}.field input[type=password],.field input[type=text],.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:inherit;background:#fff;color:var(--ink)}.field textarea{min-height:100px;resize:vertical}.upload{border:2px dashed #b7cbd5;border-radius:14px;padding:18px;text-align:center;background:#f8fbfc}.upload input{max-width:100%}.preview{display:block;width:100%;max-height:360px;object-fit:contain;background:#eef3f6;border-radius:12px;margin-top:12px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.actions .btn{flex:1}.notice{margin-top:14px;border-left:4px solid var(--gold);background:#fff8e9;padding:12px 14px;border-radius:0 10px 10px 0;color:#614a1e;font-size:.88rem}.status{margin-top:12px;padding:11px 12px;border-radius:10px;background:#edf3f6;color:#344b5a;font-size:.9rem}.status.error{background:#fff0f0;color:var(--red)}.result{margin-top:16px}.result img,.result video{width:100%;max-height:420px;object-fit:contain;border-radius:12px;background:#edf2f5}.result a{display:inline-block;margin-top:9px;font-weight:750}.small{font-size:.82rem;color:var(--muted)}.toplink{display:inline-block;color:white;margin-top:14px}.hidden{display:none!important}.footer{padding:22px 0;color:var(--muted);font-size:.82rem}.check{display:flex;gap:9px;align-items:flex-start;font-size:.88rem;margin-top:12px}.check input{margin-top:5px}@media(max-width:760px){.layout{grid-template-columns:1fr}.wrap{padding:12px}.hero{padding:22px}.actions{flex-direction:column}.actions .btn{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="eyebrow">Igmaustral · Herramienta interna</div>
+ <h1>Estudio de contenido con IA</h1>
+ <p>Sube una fotografía real de tu paño y crea una imagen para catálogo o un video vertical para redes. La API se ejecuta en el servidor; tu clave no se expone en el navegador.</p>
+ <a class="toplink" href="/">← Volver al panel de marketing</a>
+</header>
+<div class="layout">
+ <section class="card">
+  <h2>1. Producto de referencia</h2>
+  <p class="muted">Utiliza una foto nítida del producto real, con buena luz y sin filtros. Recomendado: JPG/PNG, máximo 4 MB.</p>
+  <div class="field"><label for="password">Contraseña del estudio</label><input id="password" type="password" autocomplete="current-password" placeholder="Contraseña configurada en Vercel"></div>
+  <div class="field"><label for="product">Nombre del producto (para organizar)</label><input id="product" type="text" placeholder="Ej. Huaipe mecánico blanco"></div>
+  <div class="field upload"><label for="photo">Subir fotografía real</label><input id="photo" type="file" accept="image/png,image/jpeg,image/webp"><div class="small">La foto se reduce en el navegador antes de enviarse.</div></div>
+  <img id="sourcePreview" class="preview hidden" alt="Vista previa de la fotografía original">
+  <div class="field"><label for="scene">Escena / estilo</label><select id="scene"><option value="industrial">Taller mecánico industrial</option><option value="catalog">Catálogo limpio con fondo neutro</option><option value="maintenance">Mesa de mantenimiento de maquinaria</option><option value="marine">Entorno de mantenimiento marítimo</option><option value="custom">Escribir mi propia escena</option></select></div>
+  <div class="field"><label for="customScene">Detalle opcional de la escena</label><textarea id="customScene" placeholder="Ej. banco metálico ordenado, iluminación natural, herramientas desenfocadas al fondo..."></textarea></div>
+  <label class="check"><input id="consent" type="checkbox" checked><span>Confirmo que esta foto corresponde a un producto de Igmaustral y puedo utilizarla para publicidad.</span></label>
+  <div class="notice"><strong>Control de fidelidad:</strong> la IA puede alterar la textura o los bordes. Revisa cada resultado antes de publicarlo; no uses una imagen generada como ficha técnica exacta.</div>
+ </section>
+ <section class="card">
+  <h2>2. Generar contenido</h2>
+  <p class="muted">Primero prueba con una imagen. Cada generación puede tener un costo según el modelo y la cuenta del proveedor.</p>
+  <div class="field"><label for="imagePrompt">Instrucción para la fotografía</label><textarea id="imagePrompt">Fondo de taller mecánico industrial realista, banco de trabajo metálico, iluminación natural y profesional, herramientas desenfocadas al fondo. Mantener el producto original como protagonista, conservar su color, trama, fibras, forma, bordes y proporciones. No rediseñar ni reemplazar el paño. Sin texto, sin logotipos añadidos.</textarea></div>
+  <div class="field"><label for="videoPrompt">Instrucción para el video vertical</label><textarea id="videoPrompt">Video publicitario realista, vertical 9:16, duración aproximada 5 segundos. Movimiento de cámara lento y sutil hacia el paño original sobre una mesa de trabajo en un taller mecánico. Conservar exactamente el color, tejido, fibras, forma, bordes y proporciones del producto. No deformarlo, recolorearlo ni sustituirlo. Sin texto ni logotipos, iluminación industrial natural.</textarea></div>
+  <div class="actions"><button id="makeImage" class="btn primary">Crear fotografía</button><button id="makeVideo" class="btn primary">Crear video</button></div>
+  <div id="status" class="status" role="status">Carga una foto y escribe la contraseña configurada en Vercel para comenzar.</div>
+  <div id="result" class="result hidden"></div>
+  <div class="small" style="margin-top:12px">Este MVP muestra enlaces de salida del proveedor. Para una biblioteca permanente de archivos se puede añadir almacenamiento en Vercel Blob en una siguiente fase.</div>
+ </section>
+</div>
+<section class="card" style="margin-top:16px">
+ <h2>Flujo recomendado</h2>
+ <div class="muted">1. Fotografía real → 2. escena industrial → 3. video de imagen a video → 4. revisar fidelidad → 5. editar textos y logo en Canva/CapCut → 6. publicar en TikTok, Instagram y Facebook.</div>
+</section>
+<div class="footer">Igmaustral · Estudio interno de contenido. Las publicaciones deben revisarse por una persona antes de difundirse.</div>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+let sourceData = "";
+let busy = false;
+const sceneText = {
+ industrial: "realistic industrial mechanical workshop, metal workbench, softly blurred tools in the background, natural professional lighting",
+ catalog: "clean neutral studio background, soft professional product photography lighting, subtle realistic shadow",
+ maintenance: "realistic machinery maintenance bench, clean industrial workshop, metal components softly out of focus",
+ marine: "realistic marine maintenance workshop, shipyard service bench, subtle maritime industrial background",
+ custom: ""
+};
+function setStatus(message, error=false){ $("status").textContent=message; $("status").className="status"+(error?" error":""); }
+function setBusy(value){busy=value;$("makeImage").disabled=value;$("makeVideo").disabled=value;$("makeImage").style.opacity=value?".6":"1";$("makeVideo").style.opacity=value?".6":"1";}
+function resizeImage(file){
+ return new Promise((resolve,reject)=>{
+  const reader=new FileReader();
+  reader.onerror=()=>reject(new Error("No se pudo leer la imagen."));
+  reader.onload=()=>{
+   const img=new Image();
+   img.onerror=()=>reject(new Error("El archivo no parece ser una imagen válida."));
+   img.onload=()=>{
+    const scale=Math.min(1,1200/Math.max(img.width,img.height));
+    const canvas=document.createElement("canvas");canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);
+    const ctx=canvas.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    resolve(canvas.toDataURL("image/jpeg",.76));
+   };
+   img.src=reader.result;
+  };
+  reader.readAsDataURL(file);
+ });
+}
+$("photo").addEventListener("change",async e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ if(!/^image\/(jpeg|png|webp)$/.test(file.type)){setStatus("Usa un archivo JPG, PNG o WebP.",true);return;}
+ try{sourceData=await resizeImage(file);$("sourcePreview").src=sourceData;$("sourcePreview").classList.remove("hidden");setStatus("Fotografía lista. Puedes crear una imagen o un video.");}
+ catch(err){setStatus(err.message,true);}
+});
+function getScene(){
+ const selected=$("scene").value;
+ const custom=$("customScene").value.trim();
+ if(selected==="custom")return custom||"realistic industrial workshop, neutral lighting";
+ return sceneText[selected]+(custom?", "+custom:"");
+}
+async function makeVerticalData(dataUrl){
+ return new Promise((resolve,reject)=>{
+  const img=new Image();
+  img.onerror=()=>reject(new Error("No se pudo preparar la foto para video."));
+  img.onload=()=>{
+   const canvas=document.createElement("canvas");canvas.width=720;canvas.height=1280;
+   const ctx=canvas.getContext("2d");ctx.fillStyle="#eef2f4";ctx.fillRect(0,0,720,1280);
+   const scale=Math.min(680/img.width,980/img.height);
+   const w=Math.round(img.width*scale),h=Math.round(img.height*scale);
+   ctx.drawImage(img,(720-w)/2,(1280-h)/2,w,h);
+   resolve(canvas.toDataURL("image/jpeg",.78));
+  };
+  img.src=dataUrl;
+ });
+}
+async function generate(kind){
+ if(busy)return;
+ if(!$("password").value.trim()){setStatus("Escribe la contraseña del estudio.",true);return;}
+ if(!sourceData){setStatus("Primero sube la fotografía real del paño.",true);return;}
+ if(!$("consent").checked){setStatus("Confirma que puedes utilizar esta fotografía.",true);return;}
+ if(kind==="video" && !$("videoPrompt").value.trim()){setStatus("Añade una instrucción para el video.",true);return;}
+ setBusy(true);$("result").classList.add("hidden");setStatus(kind==="image"?"Generando fotografía… puede tardar unos segundos.":"Generando video… la generación puede tardar más.");
+ const prompt=kind==="image"?($("imagePrompt").value.trim()+" Scene: "+getScene()):$("videoPrompt").value.trim()+" Scene: "+getScene();
+ try{
+  const response=await fetch(kind==="image"?"/api/generate-image":"/api/generate-video",{
+   method:"POST",headers:{"Content-Type":"application/json","x-studio-password":$("password").value},
+   body:JSON.stringify({imageData:kind==="video"?await makeVerticalData(sourceData):sourceData,prompt,productName:$("product").value.trim()})
+  });
+  let data=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(data.error||"No se pudo generar el contenido.");
+  let url=data.url;
+  if(kind==="video" && data.requestId){
+   const requestId=data.requestId;
+   setStatus("Video en cola. Esto puede tardar 1–3 minutos; no cierres esta página.");
+   let completed=false;
+   for(let i=0;i<60;i++){
+    await new Promise(resolve=>setTimeout(resolve,5000));
+    const statusResponse=await fetch("/api/video-status?requestId="+encodeURIComponent(requestId),{headers:{"x-studio-password":$("password").value}});
+    data=await statusResponse.json().catch(()=>({}));
+    if(!statusResponse.ok)throw new Error(data.error||"No se pudo consultar el estado del video.");
+    if(data.status==="COMPLETED" && data.url){url=data.url;completed=true;break;}
+    if(data.status==="FAILED")throw new Error(data.error||"El proveedor no pudo generar el video.");
+    setStatus("Generando video… estado: "+(data.status||"procesando")+" ("+(i+1)+"/60).");
+   }
+   if(!completed)throw new Error("La generación sigue en proceso. Intenta crear el video de nuevo en unos minutos.");
+  }
+  $("result").innerHTML="";
+  const heading=document.createElement("h3");heading.textContent=(kind==="image"?"Fotografía generada":"Video generado")+( $("product").value.trim()?" · "+$("product").value.trim():"");$("result").appendChild(heading);
+  let media;
+  if(kind==="image"){media=document.createElement("img");media.alt="Fotografía generada para Igmaustral";media.src=url;}
+  else{media=document.createElement("video");media.src=url;media.controls=true;media.playsInline=true;}
+  $("result").appendChild(media);
+  const link=document.createElement("a");link.href=url;link.target="_blank";link.rel="noopener";link.textContent="Abrir o guardar archivo ↗";$("result").appendChild(link);
+  const note=document.createElement("p");note.className="small";note.textContent="Revisa el color, tejido y forma del producto frente a la fotografía original antes de publicar."; $("result").appendChild(note);
+  $("result").classList.remove("hidden");setStatus("Listo. Revisa el resultado antes de usarlo en una publicación.");
+ }catch(err){setStatus(err.message||"Ocurrió un error.",true);}
+ finally{setBusy(false);}
+}
+$("makeImage").addEventListener("click",()=>generate("image"));
+$("makeVideo").addEventListener("click",()=>generate("video"));
+</script>
+</body>
+</html>

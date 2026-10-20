@@ -5,7 +5,8 @@
 - Genera guiones comerciales basados en plantillas editables.
 - Permite cargar una fotografía del producto y montar un video con movimiento de cámara, marca y texto.
 - Ofrece formatos vertical 9:16, cuadrado 1:1 y horizontal 16:9.
-- Exporta WebM usando MediaRecorder cuando el navegador lo soporta.
+- Exporta WebM con pista de audio usando MediaRecorder cuando el navegador lo soporta.
+- Permite cargar una pista propia de música o voz en off; si no se carga audio, añade una base sonora electrónica sencilla generada localmente.
 - No utiliza API externa, no requiere claves y no realiza llamadas de pago.
 - No guarda imágenes en el servidor ni publica contenido automáticamente.
 
@@ -17,8 +18,9 @@ Esta primera entrega no genera escenas fotorrealistas nuevas ni una voz sintéti
 2. Selecciona un producto y formato.
 3. Carga una foto real JPG o PNG.
 4. Pulsa “Crear guion comercial”.
-5. Pulsa “Generar video sin coste”, espera que termine y descarga el archivo WebM.
-6. Revisa la fidelidad del producto y el texto antes de publicar.
+5. Opcionalmente carga una pista de audio (música y/o voz en off). Si no cargas ninguna, se añadirá una base sonora sencilla.
+6. Pulsa “Generar video con audio”, espera que termine y descarga el archivo WebM.
+7. Revisa la fidelidad del producto, el audio y el texto antes de publicar.
 
 ## Seguridad
 - No añadas claves API a archivos del repositorio.

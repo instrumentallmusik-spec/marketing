@@ -21,6 +21,30 @@
 <div id="diagnosticResults" role="status" aria-live="polite" class="empty" style="margin-top:12px">Aún no se han ejecutado las pruebas.</div>
 </section>
 <section class="section stat-grid" aria-label="Resumen de contenido"><div class="stat"><strong id="totalCount">0</strong><span>Borradores guardados</span></div><div class="stat"><strong id="pendingCount">0</strong><span>Por revisar</span></div><div class="stat"><strong id="approvedCount">0</strong><span>Aprobados por ti</span></div><div class="stat"><strong id="scheduledCount">0</strong><span>Con fecha planificada</span></div></section>
+<section class="section card" aria-labelledby="imageGenTitle">
+<h2 id="imageGenTitle">Generador de imágenes IA · Etapa 2</h2>
+<p class="sub">Transforma una fotografía real de tus paños en una imagen comercial. La solicitud solo se envía cuando pulsas el botón y confirmas el posible consumo de créditos.</p>
+<div class="notice"><strong>Control de coste:</strong> este modelo de fal.ai cobra según el uso y la resolución. La referencia publicada para FLUX.1 [dev] image-to-image es por megapíxel; el coste final depende de la salida y de las tarifas vigentes. Consulta <a href="https://fal.ai/models/fal-ai/flux-1/dev/image-to-image" target="_blank" rel="noopener">el precio oficial</a> y tu saldo antes de usarlo. Esta app no puede imponer un tope de gasto en tu cuenta.</div>
+<div class="grid" style="margin-top:14px">
+<div>
+<div class="field"><label for="imageGenFile">Foto real del producto (JPG, PNG o WebP)</label><input id="imageGenFile" type="file" accept="image/jpeg,image/png,image/webp"><span class="hint">La foto se reduce en tu navegador antes de enviarla. No se guarda en el planificador.</span></div>
+<div class="field"><label for="studioPassword">Contraseña del estudio</label><input id="studioPassword" type="password" autocomplete="current-password" placeholder="Contraseña configurada en Vercel"><span class="hint">No es la clave API. No la guardamos en este navegador.</span></div>
+<div class="field"><label for="imageGenPrompt">Instrucción para la imagen</label><textarea id="imageGenPrompt">Usa la fotografía como referencia principal del paño de limpieza industrial. Conserva el producto, su color, forma, textura, fibras y proporciones; no lo rediseñes. Mejora la iluminación y presenta el mismo paño en un entorno de taller industrial realista, limpio y sobrio, con composición comercial profesional. Sin texto, sin etiquetas inventadas, sin logotipos añadidos y sin propiedades técnicas no verificadas.</textarea></div>
+<div class="field"><label><input id="imageCostConsent" type="checkbox"> Confirmo que revisé el precio y autorizo una generación que puede consumir saldo de fal.ai. Entiendo que el coste final depende del modelo y la resolución.</label></div>
+<div class="toolbar"><button class="btn primary" id="generateMarketingImage" type="button">Generar una imagen IA</button></div>
+<p id="imageGenStatus" class="small" role="status" aria-live="polite">Sin solicitudes activas. No se ha enviado ninguna imagen.</p>
+</div>
+<div>
+<div id="imageGenPreview" class="empty" style="min-height:220px">La vista previa aparecerá aquí cuando selecciones una foto o cuando termine una generación.</div>
+<div id="imageGenResult" style="display:none;margin-top:12px">
+<img id="generatedImage" alt="Imagen generada para revisar" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--line)">
+<div class="toolbar"><a id="downloadGeneratedImage" class="btn dark" target="_blank" rel="noopener">Abrir / guardar imagen</a></div>
+<p class="small">Revisa que el color y la textura del paño sigan siendo fieles al producto real antes de usar esta imagen comercialmente.</p>
+</div>
+</div>
+</div>
+</section>
+
 <section class="section grid">
 <article class="card"><h2>1. Diseñar una campaña</h2><p class="sub">Elige el producto y el objetivo. Se crean propuestas editables usando plantillas locales.</p>
 <div class="field"><label for="product">Producto</label><select id="product"><option>Paños de limpieza nuevos</option><option>Franela de algodón nueva</option><option>Huaipe mecánico de color</option><option>Huaipe mecánico blanco</option><option>Paños no tejidos de celulosa</option><option>Paños de absorción de hidrocarburos</option><option>Paños de limpieza reutilizados</option></select></div>
@@ -158,6 +182,65 @@ async function runDiagnostics(){
  $("diagnosticResults").className=passed===results.length?"empty":"notice";
  $("diagnosticResults").innerHTML="<strong>Resultado: "+passed+"/"+results.length+" pruebas correctas</strong><ul>"+results.map(r=>"<li>"+(r.ok?"✓ ":"✗ ")+r.name+(r.detail?" — "+r.detail:"")+"</li>").join("")+"</ul><p class='small'>Las pruebas son locales y temporales. No se hizo ninguna llamada a un proveedor de IA.</p>";
 }
+
+let imageGenFileData=null;
+$("imageGenFile").addEventListener("change",async()=>{
+ const file=$("imageGenFile").files?.[0];
+ imageGenFileData=null;
+ $("imageGenResult").style.display="none";
+ if(!file){$("imageGenStatus").textContent="Sin fotografía seleccionada.";return}
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)){ $("imageGenStatus").textContent="Formato no compatible. Usa JPG, PNG o WebP.";return}
+ if(file.size>15*1024*1024){$("imageGenStatus").textContent="La foto original supera 15 MB. Elige una foto más pequeña.";return}
+ try{
+  const dataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error("No se pudo leer la fotografía."));reader.readAsDataURL(file)});
+  const img=await new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error("La fotografía no se pudo abrir."));im.src=dataUrl});
+  const scale=Math.min(1,1280/Math.max(img.naturalWidth,img.naturalHeight));
+  const canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));
+  const ctx=canvas.getContext("2d");ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  imageGenFileData=canvas.toDataURL("image/jpeg",0.82);
+  if(imageGenFileData.length>3_700_000){imageGenFileData=canvas.toDataURL("image/jpeg",0.68)}
+  $("imageGenPreview").innerHTML="";const preview=document.createElement("img");preview.src=imageGenFileData;preview.alt="Fotografía de referencia";preview.style.cssText="width:100%;height:auto;border-radius:10px";$("imageGenPreview").append(preview);
+  $("imageGenStatus").textContent="Foto preparada ("+canvas.width+" × "+canvas.height+"). No se ha enviado ni generado nada.";
+ }catch(e){imageGenFileData=null;$("imageGenStatus").textContent=e.message||"No se pudo preparar la fotografía."}
+});
+$("generateMarketingImage").addEventListener("click",async()=>{
+ if(!imageGenFileData){$("imageGenStatus").textContent="Primero selecciona una foto del producto.";return}
+ const password=$("studioPassword").value;
+ if(!password){$("imageGenStatus").textContent="Introduce la contraseña del estudio configurada en Vercel.";return}
+ if(!$("imageCostConsent").checked){$("imageGenStatus").textContent="Para continuar debes confirmar que revisaste el precio y autorizas esta generación.";return}
+ const button=$("generateMarketingImage");
+ button.disabled=true;
+ let requestId=null;
+ try{
+  $("imageGenStatus").textContent="Enviando una única solicitud al proveedor…";
+  const response=await fetch("/api/generate-marketing-image",{method:"POST",headers:{"Content-Type":"application/json","x-studio-password":password},body:JSON.stringify({imageData:imageGenFileData,prompt:$("imageGenPrompt").value,costConfirmed:true})});
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(data.error||"No se pudo iniciar la generación.");
+  requestId=data.requestId;
+  if(!requestId)throw new Error("El proveedor no devolvió un identificador. No vuelvas a generar sin revisar el estado del proveedor.");
+  $("imageGenStatus").textContent="Solicitud enviada. Consultando el estado; no se volverá a enviar la generación automáticamente…";
+  for(let i=0;i<60;i++){
+   await new Promise(resolve=>setTimeout(resolve,4000));
+   const statusResponse=await fetch("/api/marketing-image-status?requestId="+encodeURIComponent(requestId),{headers:{"x-studio-password":password,"Cache-Control":"no-store"}});
+   const statusData=await statusResponse.json().catch(()=>({}));
+   if(!statusResponse.ok)throw new Error(statusData.error||"No se pudo consultar el estado. Revisa el panel del proveedor antes de repetir.");
+   if(statusData.status==="COMPLETED"&&statusData.url){
+    $("generatedImage").src=statusData.url;
+    $("downloadGeneratedImage").href=statusData.url;
+    $("imageGenResult").style.display="block";
+    $("imageGenStatus").textContent="Imagen lista. Revisa la fidelidad del producto antes de aprobarla.";
+    $("imageGenPreview").textContent="Foto de referencia enviada.";
+    return;
+   }
+   if(statusData.status==="FAILED")throw new Error(statusData.error||"La generación falló. Revisa el panel del proveedor antes de repetir.");
+   $("imageGenStatus").textContent="Generación en curso ("+(i+1)+"/60). Estado: "+(statusData.status||"procesando")+".";
+  }
+  $("imageGenStatus").textContent="La solicitud sigue sin resultado visible. No pulses generar de nuevo todavía; revisa la solicitud en fal.ai.";
+ }catch(e){
+  $("imageGenStatus").textContent=(e.message||"Ocurrió un error.")+(requestId?" ID de solicitud: "+requestId+". No se envió otra generación.":"");
+ }finally{button.disabled=false}
+});
+
 $("runDiagnostics").addEventListener("click",runDiagnostics);
 render();
 </script></body></html>

@@ -35,7 +35,8 @@
 <p class="small">La generación se procesa en los servidores de Kling. No cierres esta pestaña mientras se consulta el estado. Tu clave API permanece en Vercel y no se envía al navegador.</p>
 </article>
 </section>
-\n<section class="section grid"><article class="card"><h2>3. Guion sugerido</h2><p class="sub">Edita el texto si lo necesitas antes de exportar.</p><div id="script" class="script" aria-live="polite">Selecciona el producto y pulsa “Crear guion comercial”.</div><div class="toolbar"><button class="btn primary" id="videoBtn" disabled>Generar video con audio</button><button class="btn" id="copyBtn" style="background:#e8eef2;color:#183447">Copiar guion</button></div><div id="status" class="status" aria-live="polite">Listo para comenzar. Todavía no se ha generado ningún video.</div><div class="meter"><span id="progress"></span></div><p class="small" id="progressLabel">El montaje se realiza localmente en esta pestaña.</p></article>
+
+<section class="section grid"><article class="card"><h2>3. Guion sugerido</h2><p class="sub">Edita el texto si lo necesitas antes de exportar.</p><div id="script" class="script" aria-live="polite">Selecciona el producto y pulsa “Crear guion comercial”.</div><div class="toolbar"><button class="btn primary" id="videoBtn" disabled>Generar video con audio</button><button class="btn" id="copyBtn" style="background:#e8eef2;color:#183447">Copiar guion</button></div><div id="status" class="status" aria-live="polite">Listo para comenzar. Todavía no se ha generado ningún video.</div><div class="meter"><span id="progress"></span></div><p class="small" id="progressLabel">El montaje se realiza localmente en esta pestaña.</p></article>
 <article class="card"><h2>4. Video exportado</h2><p class="sub">Previsualiza el resultado y descárgalo para revisarlo antes de publicarlo.</p><video id="result" class="preview" controls playsinline></video><div class="toolbar"><a id="download" class="btn primary" hidden download="igmaustral-video.webm">Descargar video</a><button class="btn" id="mp4Btn" style="background:#e8eef2;color:#183447" disabled>Convertir a MP4</button><button class="btn" id="resetBtn" style="background:#e8eef2;color:#183447">Limpiar proyecto</button></div><p class="small">El montaje se genera primero como WebM. Puedes convertirlo a MP4 desde aquí: se descarga un conversor de código abierto al navegador, sin API de pago. La primera conversión puede tardar y requiere conexión a internet.</p></article></section>
 <footer>Prototipo inicial · No publica automáticamente, no envía archivos a servicios externos y no contiene claves API. La generación de escenas IA avanzadas queda desactivada hasta revisar proveedor, cuota y costes.</footer></main>
 <script>
@@ -84,8 +85,20 @@ klingButton.addEventListener("click",async()=>{
  klingButton.disabled=true;$("klingProgress").value=3;$("klingResult").removeAttribute("src");$("klingDownload").hidden=true;
  $("klingStatus").textContent="Preparando la fotografía y enviando la solicitud a Kling…";
  try{
-  const dataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error("No se pudo leer la foto."));reader.readAsDataURL(file)});
-  const image=String(dataUrl).split(",")[1];
+  // Resize before sending through Vercel's serverless request body limit.
+  const image=await new Promise((resolve,reject)=>{
+   const sourceUrl=URL.createObjectURL(file),img=new Image();
+   img.onload=()=>{
+    try{
+     const scale=Math.min(1,1600/Math.max(img.naturalWidth,img.naturalHeight));
+     const canvas=document.createElement("canvas");canvas.width=Math.max(300,Math.round(img.naturalWidth*scale));canvas.height=Math.max(300,Math.round(img.naturalHeight*scale));
+     const ctx=canvas.getContext("2d");ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
+     const dataUrl=canvas.toDataURL("image/jpeg",0.82);URL.revokeObjectURL(sourceUrl);
+     const encoded=dataUrl.split(",")[1];if(encoded.length>4_000_000)reject(new Error("La imagen optimizada sigue siendo demasiado grande. Prueba una foto más pequeña."));else resolve(encoded);
+    }catch(e){URL.revokeObjectURL(sourceUrl);reject(e)}
+   };
+   img.onerror=()=>{URL.revokeObjectURL(sourceUrl);reject(new Error("No se pudo procesar la foto."))};img.src=sourceUrl;
+  });
   const createResponse=await fetch("/api/kling/generate",{method:"POST",headers:{"Content-Type":"application/json","x-studio-password":password},body:JSON.stringify({image,prompt,duration})});
   const created=await createResponse.json().catch(()=>({}));
   if(!createResponse.ok)throw new Error(created.error||"Kling no pudo iniciar la generación.");
@@ -113,4 +126,5 @@ klingButton.addEventListener("click",async()=>{
   $("klingStatus").textContent=error&&error.message?error.message:"Ocurrió un error al generar el video.";
  }finally{klingButton.disabled=false}
 });
-\n</script></body></html>
+
+</script></body></html>

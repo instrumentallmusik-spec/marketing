@@ -151,7 +151,7 @@ async function runDiagnostics(){
   const before=drafts.length;
   $("createCampaign").click();
   check("Crear campaña",drafts.length>before&&drafts.some(d=>d.product==="Paños de limpieza nuevos"),"Se crearon borradores de prueba.");
-  const testDraft=drafts.find(d=>d.product==="Paños de limpieza nuevos");
+  const testDraft=drafts[0];
   if(testDraft){
    testDraft.text="Texto de prueba editado";
    save();

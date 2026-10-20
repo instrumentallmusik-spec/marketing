@@ -1,30 +1,35 @@
 # Estudio de video de Igmaustral
 
-## Qué incluye esta primera versión
-- `estudio-video.html` es un prototipo funcional que se ejecuta en el navegador.
-- Genera guiones comerciales basados en plantillas editables.
-- Permite cargar una fotografía del producto y montar un video con movimiento de cámara, marca y texto.
+## Modos disponibles
+- **Montaje local:** guiones editables y video desde una foto con movimiento de cámara, marca, texto y audio. Se ejecuta en el navegador y no usa API de generación.
+- **Kling IA:** modo opcional de imagen a video que envía la foto al proveedor para generar movimiento y contexto visual. La IA puede alterar detalles del producto; revisar el resultado antes de publicar.
+
+## Montaje local
 - Ofrece formatos vertical 9:16, cuadrado 1:1 y horizontal 16:9.
 - Exporta WebM con pista de audio usando MediaRecorder cuando el navegador lo soporta.
-- Incluye conversión opcional de WebM a MP4 en el navegador mediante FFmpeg.wasm; descarga de librerías de código abierto desde CDN, sin API de generación de pago.
-- Permite cargar una pista propia de música o voz en off; si no se carga audio, añade una base sonora electrónica sencilla generada localmente.
-- No utiliza API externa, no requiere claves y no realiza llamadas de pago.
+- Incluye conversión opcional de WebM a MP4 en el navegador mediante FFmpeg.wasm; descarga librerías desde CDN, sin API de generación de pago.
+- Permite cargar música o voz en off propia; si no se carga audio, añade una base sonora sencilla generada localmente.
 - No guarda imágenes en el servidor ni publica contenido automáticamente.
 
-## Límites conocidos
-Esta entrega no genera escenas fotorrealistas nuevas ni voz sintética automática: produce un montaje animado a partir de la foto real. La narración se incorpora cargando una pista de voz en off propia. La conversión MP4 es opcional y puede fallar según navegador, memoria disponible o conexión; WebM queda como alternativa. Es deliberado para habilitar una primera función útil sin activar cobros. La conexión futura a proveedores de video debe ser opt-in, con confirmación de costes y claves guardadas solo en variables de entorno privadas de Vercel.
+## Kling IA: configuración requerida
+Configura en Vercel, al menos para **Preview** durante las pruebas:
+- `KLING_API_KEY`: clave API de la consola de desarrolladores de Kling.
+- `STUDIO_PASSWORD`: contraseña privada del estudio. La persona que genera el video la introduce en la interfaz y el servidor la compara con esta variable.
 
-## Prueba
-1. Abre el estudio desde el panel.
-2. Selecciona un producto y formato.
-3. Carga una foto real JPG o PNG.
-4. Pulsa “Crear guion comercial”.
-5. Opcionalmente carga una pista de audio (música y/o voz en off). Si no cargas ninguna, se añadirá una base sonora sencilla.
-6. Pulsa “Generar video con audio”, espera que termine y revisa el resultado.
-7. Pulsa “Convertir a MP4” si necesitas un archivo más compatible con redes; la primera vez descarga librerías grandes y puede tardar. Requiere conexión estable y un navegador actualizado.
-8. Revisa la fidelidad del producto, el audio y el texto antes de publicar.
+Las claves se mantienen en variables de entorno del servidor; nunca se añaden al repositorio ni se exponen en JavaScript del navegador. Los endpoints `/api/kling/generate` y `/api/kling/status` validan la contraseña del estudio. El modo Kling solo inicia una generación tras una confirmación explícita de posible consumo de créditos/cargos. Usa el modelo Kling v2.5 Turbo, modo estándar y 5 segundos por defecto; se puede seleccionar 10 segundos. La foto se reduce en el navegador antes de enviarse para respetar los límites de tamaño de la función serverless.
 
-## Seguridad
-- No añadas claves API a archivos del repositorio.
+## Costos y privacidad
+- Kling es un servicio externo y puede consumir recursos o generar cargos según el saldo/paquete de API de la cuenta.
+- No pulses “Generar video con Kling IA” hasta revisar el saldo y el precio actual en la consola oficial.
+- Al usar Kling, la foto y el prompt se envían a Kling. El montaje local, en cambio, se procesa en el navegador.
 - No actives proveedores externos sin revisar cuota, precio, licencia comercial y método de facturación.
-- Los videos se generan localmente en el navegador; mantener la pestaña abierta hasta finalizar.
+
+## Prueba manual pendiente
+1. Desplegar la rama en Vercel Preview y configurar `KLING_API_KEY` y `STUDIO_PASSWORD` en el entorno Preview.
+2. Abrir el estudio y cargar una foto JPG/PNG de producto.
+3. Introducir la contraseña del estudio, ajustar el prompt y marcar la confirmación de posible consumo.
+4. Iniciar una generación corta y confirmar que el estado progresa y se muestra el video.
+5. Revisar que el producto mantenga su color, textura y forma; la generación puede introducir alteraciones.
+6. Confirmar el comportamiento ante contraseña incorrecta, saldo insuficiente, fallo del proveedor y tiempo de espera.
+
+La integración de Kling está implementada en la rama de trabajo, pero la prueba real requiere una clave válida con recursos disponibles y un despliegue accesible. No se ha ejecutado ninguna generación desde el repositorio.

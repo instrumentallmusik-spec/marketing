@@ -47,6 +47,38 @@ Se agregó `centro-marketing-ia.html` y un acceso desde `index.html` en la rama 
 3. Exigir una acción explícita por cada publicación.
 4. No activar publicación automática hasta que el usuario la solicite expresamente y apruebe sus reglas.
 
+
+## Actualización de etapa 1 y etapa 2
+
+### Autodiagnóstico de la etapa 1
+El centro incluye un botón de autodiagnóstico que crea borradores ficticios temporalmente y comprueba:
+- creación de campaña;
+- edición de texto;
+- estado de aprobación;
+- fecha y evento del calendario;
+- construcción del CSV;
+- serialización en localStorage.
+
+Al finalizar, intenta restaurar los borradores y el valor previo de localStorage. El test no llama a servicios externos ni descarga archivos. Debe ejecutarse en Preview en el navegador real para confirmar compatibilidad con el entorno del usuario.
+
+### Etapa 2 — generador de imágenes con confirmación explícita
+Se añadió una interfaz de generación y dos funciones serverless:
+- `POST /api/generate-marketing-image`: comprueba `FAL_KEY`, `STUDIO_PASSWORD`, contraseña, tamaño/tipo de imagen y `costConfirmed === true`; envía una sola tarea a la cola de fal.ai.
+- `GET /api/marketing-image-status?requestId=...`: consulta una tarea ya iniciada; no crea una nueva generación.
+
+Modelo inicial: `fal-ai/flux-1/dev/image-to-image`. La interfaz no llama a generación hasta que el usuario selecciona una foto, escribe la contraseña del estudio, marca la autorización de coste y pulsa “Generar una imagen IA”. La clave API solo se lee desde el entorno del servidor. La fotografía se reduce en el navegador y no se guarda en localStorage.
+
+**Advertencias de coste:** el precio es variable según resolución y tarifas vigentes. La interfaz enlaza al precio oficial y aclara que no impone un límite de gasto a la cuenta fal.ai. Antes de generar, revisar saldo, precio actual y cualquier límite de gasto disponible en el proveedor. No se ha realizado ninguna generación de prueba ni se ha verificado el comportamiento con una clave real.
+
+### Validaciones pendientes de la etapa 2
+1. Confirmar que Preview tiene `FAL_KEY` y `STUDIO_PASSWORD` en el entorno Preview.
+2. Probar una única generación solo tras autorización explícita del usuario.
+3. Confirmar que el proveedor acepta el formato de imagen enviado y devuelve `request_id`.
+4. Confirmar el estado final y que la imagen de resultado se muestra.
+5. Verificar el coste real en el panel de fal.ai antes de realizar una segunda generación.
+6. Si el resultado queda incierto o hay timeout, consultar el estado del mismo `requestId`; no volver a enviar una solicitud automáticamente.
+7. No fusionar el PR ni cambiar producción sin autorización expresa.
+
 ## Criterios de seguridad y coste
 - No almacenar claves API en el repositorio ni en el navegador.
 - No ejecutar generación externa ni tareas de pago en segundo plano.

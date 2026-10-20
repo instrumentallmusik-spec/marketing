@@ -14,6 +14,12 @@
 <body><main class="wrap">
 <header class="hero"><div class="eyebrow">Igmaustral · Centro de marketing</div><h1>Planifica. Crea. Revisa. Publica.</h1><p>Un centro de trabajo para planificar campañas, redactar borradores comerciales y organizar imágenes y videos de paños industriales. Esta primera versión no necesita API de pago y no publica nada automáticamente.</p><div class="toolbar"><a class="btn light" href="./">← Volver al panel</a><a class="btn outline" href="./estudio-video.html">Abrir estudio de video ↗</a><a class="btn outline" href="https://igmaustral.com" target="_blank" rel="noopener">Web Igmaustral ↗</a></div></header>
 <section class="section"><div class="notice"><strong>Control de costes y aprobación:</strong> el planificador y los borradores funcionan en este navegador sin llamar a servicios de IA ni consumir créditos. La generación de video con Kling y cualquier generador externo puede tener coste; se ejecuta aparte y solo después de una acción explícita. Este panel no publica automáticamente en redes.</div></section>
+<section class="section card" aria-labelledby="diagTitle">
+<h2 id="diagTitle">Autodiagnóstico del centro</h2>
+<p class="sub">Comprueba las cinco funciones principales en este navegador. La prueba guarda temporalmente datos ficticios y luego restaura tus borradores; no llama a servicios externos ni consume créditos.</p>
+<div class="toolbar"><button class="btn dark" id="runDiagnostics" type="button">Ejecutar autodiagnóstico</button></div>
+<div id="diagnosticResults" role="status" aria-live="polite" class="empty" style="margin-top:12px">Aún no se han ejecutado las pruebas.</div>
+</section>
 <section class="section stat-grid" aria-label="Resumen de contenido"><div class="stat"><strong id="totalCount">0</strong><span>Borradores guardados</span></div><div class="stat"><strong id="pendingCount">0</strong><span>Por revisar</span></div><div class="stat"><strong id="approvedCount">0</strong><span>Aprobados por ti</span></div><div class="stat"><strong id="scheduledCount">0</strong><span>Con fecha planificada</span></div></section>
 <section class="section grid">
 <article class="card"><h2>1. Diseñar una campaña</h2><p class="sub">Elige el producto y el objetivo. Se crean propuestas editables usando plantillas locales.</p>
@@ -100,7 +106,58 @@ $("imageBrief").addEventListener("click",makeImageBrief);
 $("copyImageBrief").addEventListener("click",async()=>{if(!$("imageBriefOutput").value)makeImageBrief();try{await navigator.clipboard.writeText($("imageBriefOutput").value);$("copyImageBrief").textContent="Brief copiado"}catch(e){$("imageBriefOutput").focus();$("imageBriefOutput").select()}});
 $("clearDrafts").addEventListener("click",()=>{if(confirm("¿Borrar todos los borradores guardados en este navegador? Exporta una copia si deseas conservarlos.")){drafts=[];save()}});
 $("exportJson").addEventListener("click",()=>download("igmaustral-borradores.json",JSON.stringify({exportedAt:new Date().toISOString(),drafts},null,2),"application/json"));
-$("exportCsv").addEventListener("click",()=>{const cols=["title","product","kind","channel","date","status","text"];const esc=v=>'"'+String(v??"").replace(/"/g,'""')+'"';const csv=[cols.join(","),...drafts.map(d=>cols.map(k=>esc(d[k])).join(","))].join("\r\n");download("igmaustral-calendario.csv","\ufeff"+csv,"text/csv;charset=utf-8")});
+function buildCsv(items=drafts){const cols=["title","product","kind","channel","date","status","text"];const esc=v=>'"'+String(v??"").replace(/"/g,'""')+'"';return [cols.join(","),...items.map(d=>cols.map(k=>esc(d[k])).join(","))].join("\r\n")}
+$("exportCsv").addEventListener("click",()=>download("igmaustral-calendario.csv","\ufeff"+buildCsv(),"text/csv;charset=utf-8"));
 function download(name,content,type){const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+
+async function runDiagnostics(){
+ const results=[];
+ const check=(name,ok,detail="")=>results.push({name,ok:Boolean(ok),detail});
+ const originalDrafts=drafts.map(d=>({...d}));
+ let originalStorage=null,hadStorage=false;
+ try{originalStorage=localStorage.getItem(STORAGE_KEY);hadStorage=originalStorage!==null}catch(e){}
+ try{
+  drafts=originalDrafts.map(d=>({...d}));
+  $("product").value="Paños de limpieza nuevos";
+  $("audience").value="industrial";
+  $("goal").value="quote";
+  $("channels").value="social";
+  $("tone").value="professional";
+  $("facts").value="Prueba de diagnóstico; no usar como dato comercial.";
+  const before=drafts.length;
+  $("createCampaign").click();
+  check("Crear campaña",drafts.length>before&&drafts.some(d=>d.product==="Paños de limpieza nuevos"),"Se crearon borradores de prueba.");
+  const testDraft=drafts.find(d=>d.product==="Paños de limpieza nuevos");
+  if(testDraft){
+   testDraft.text="Texto de prueba editado";
+   save();
+   check("Editar borrador",drafts.some(d=>d.id===testDraft.id&&d.text==="Texto de prueba editado"),"El texto editado queda en el borrador.");
+   testDraft.status="Aprobado";save();
+   check("Aprobar borrador",drafts.some(d=>d.id===testDraft.id&&d.status==="Aprobado"),"El estado de aprobación se guarda.");
+   testDraft.date=dateISO(plusDays(3));save();
+   const dayHasEvent=Array.from($("calendar").querySelectorAll(".day")).some(day=>day.textContent.includes(testDraft.title));
+   check("Fecha y calendario",testDraft.date===dateISO(plusDays(3))&&dayHasEvent,"La fecha planificada aparece en el calendario de 14 días.");
+  }else{
+   check("Editar borrador",false,"No se encontró el borrador de prueba.");
+   check("Aprobar borrador",false,"No se encontró el borrador de prueba.");
+   check("Fecha y calendario",false,"No se encontró el borrador de prueba.");
+  }
+  const csv=buildCsv(drafts);
+  check("Exportar CSV",csv.startsWith('"title","product","kind","channel","date","status","text"')&&csv.includes("Texto de prueba editado"),"El contenido CSV se genera correctamente; no se descarga ningún archivo durante esta prueba.");
+  const persisted=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+  check("Persistencia local",Array.isArray(persisted)&&persisted.some(d=>d.id===testDraft?.id),"Los borradores se serializan en el almacenamiento local del navegador.");
+ }catch(e){
+  check("Error del autodiagnóstico",false,String(e&&e.message||e));
+ }finally{
+  drafts=originalDrafts;
+  try{if(hadStorage)localStorage.setItem(STORAGE_KEY,originalStorage);else localStorage.removeItem(STORAGE_KEY)}catch(e){}
+  render();
+  $("facts").value="";
+ }
+ const passed=results.filter(r=>r.ok).length;
+ $("diagnosticResults").className=passed===results.length?"empty":"notice";
+ $("diagnosticResults").innerHTML="<strong>Resultado: "+passed+"/"+results.length+" pruebas correctas</strong><ul>"+results.map(r=>"<li>"+(r.ok?"✓ ":"✗ ")+r.name+(r.detail?" — "+r.detail:"")+"</li>").join("")+"</ul><p class='small'>Las pruebas son locales y temporales. No se hizo ninguna llamada a un proveedor de IA.</p>";
+}
+$("runDiagnostics").addEventListener("click",runDiagnostics);
 render();
 </script></body></html>

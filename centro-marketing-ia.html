@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Centro de marketing de Igmaustral: planifica campañas, crea borradores y organiza contenidos con aprobación antes de publicar.">
+<meta name="theme-color" content="#102a43">
+<title>Centro de marketing IA | Igmaustral</title>
+<style>
+:root{--navy:#102a43;--blue:#176b87;--teal:#2a9d8f;--ink:#182b3a;--muted:#657786;--paper:#f4f7f9;--line:#dce5eb;--white:#fff;--gold:#e9b44c;--red:#a33b3b}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}.wrap{max-width:1180px;margin:auto;padding:22px}.hero{background:linear-gradient(120deg,#102a43,#176b87);color:#fff;border-radius:22px;padding:26px}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;font-weight:800;color:#b9e6e8}.hero h1{font-size:clamp(2rem,4vw,3rem);line-height:1.08;margin:9px 0}.hero p{color:#e1edf2;max-width:800px}.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:750;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:7px}.primary{background:var(--teal);color:white}.dark{background:var(--navy);color:white}.soft{background:#e8eef2;color:var(--navy)}.outline{background:transparent;border:1px solid #c6e2e9;color:#fff}.section{margin-top:22px}.section h2{font-size:1.25rem;margin:0 0 5px}.sub{color:var(--muted);margin:0 0 14px}.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0;box-shadow:0 4px 16px #15324a08}.field{display:flex;flex-direction:column;gap:6px;margin:12px 0}.field label{font-weight:750;font-size:.9rem}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid #cbd8e0;border-radius:10px;background:#fff;color:var(--ink)}.field textarea{min-height:88px;resize:vertical}.hint,.small{font-size:.82rem;color:var(--muted)}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.notice{padding:12px 14px;border-left:4px solid var(--gold);background:#fff8e9;border-radius:0 10px 10px 0;color:#614a1e;font-size:.9rem}.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.stat{background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px}.stat strong{font-size:1.55rem;display:block;color:var(--navy)}.stat span{font-size:.8rem;color:var(--muted)}.pill{display:inline-flex;padding:4px 8px;border-radius:999px;background:#e8f4f3;color:#17665e;font-size:.76rem;font-weight:750}.pill.wait{background:#fff4d8;color:#74551a}.pill.approved{background:#e3f5e8;color:#23623a}.queue{display:grid;gap:12px}.draft{border:1px solid var(--line);border-radius:13px;padding:14px;background:#fff}.draft-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.draft h3{font-size:1rem;margin:0 0 5px}.draft textarea{width:100%;min-height:115px;margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:9px;resize:vertical}.draft .toolbar{margin-top:9px}.empty{padding:20px;border:1px dashed #b6c7d1;border-radius:12px;color:var(--muted);text-align:center}.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}.day{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px;min-height:100px}.day strong{display:block;font-size:.83rem}.day small{color:var(--muted)}.day .event{display:block;background:#e8f4f3;color:#175f57;padding:5px;border-radius:6px;font-size:.75rem;margin-top:7px;overflow-wrap:anywhere}.divider{border:0;border-top:1px solid var(--line);margin:16px 0}footer{padding:24px 0;color:var(--muted);font-size:.83rem}@media(max-width:800px){.grid{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.calendar{grid-template-columns:repeat(2,minmax(0,1fr))}.wrap{padding:12px}.hero{padding:20px}.toolbar .btn{flex:1}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="hero"><div class="eyebrow">Igmaustral · Centro de marketing</div><h1>Planifica. Crea. Revisa. Publica.</h1><p>Un centro de trabajo para planificar campañas, redactar borradores comerciales y organizar imágenes y videos de paños industriales. Esta primera versión no necesita API de pago y no publica nada automáticamente.</p><div class="toolbar"><a class="btn light" href="./">← Volver al panel</a><a class="btn outline" href="./estudio-video.html">Abrir estudio de video ↗</a><a class="btn outline" href="https://igmaustral.com" target="_blank" rel="noopener">Web Igmaustral ↗</a></div></header>
+<section class="section"><div class="notice"><strong>Control de costes y aprobación:</strong> el planificador y los borradores funcionan en este navegador sin llamar a servicios de IA ni consumir créditos. La generación de video con Kling y cualquier generador externo puede tener coste; se ejecuta aparte y solo después de una acción explícita. Este panel no publica automáticamente en redes.</div></section>
+<section class="section card" aria-labelledby="diagTitle">
+<h2 id="diagTitle">Autodiagnóstico del centro</h2>
+<p class="sub">Comprueba seis funciones principales en este navegador. La prueba guarda temporalmente datos ficticios y luego restaura tus borradores; no llama a servicios externos ni consume créditos.</p>
+<div class="toolbar"><button class="btn dark" id="runDiagnostics" type="button">Ejecutar autodiagnóstico</button></div>
+<div id="diagnosticResults" role="status" aria-live="polite" class="empty" style="margin-top:12px">Aún no se han ejecutado las pruebas.</div>
+</section>
+<section class="section stat-grid" aria-label="Resumen de contenido"><div class="stat"><strong id="totalCount">0</strong><span>Borradores guardados</span></div><div class="stat"><strong id="pendingCount">0</strong><span>Por revisar</span></div><div class="stat"><strong id="approvedCount">0</strong><span>Aprobados por ti</span></div><div class="stat"><strong id="scheduledCount">0</strong><span>Con fecha planificada</span></div></section>
+<section class="section card" aria-labelledby="imageGenTitle">
+<h2 id="imageGenTitle">Generador de imágenes IA · Etapa 2</h2>
+<p class="sub">Transforma una fotografía real de tus paños en una imagen comercial. La solicitud solo se envía cuando pulsas el botón y confirmas el posible consumo de créditos.</p>
+<div class="notice"><strong>Control de coste:</strong> este modelo de fal.ai cobra según el uso y la resolución. La página oficial consultada publica una referencia de aproximadamente US$0,025 por megapíxel; una salida cercana a 1 MP rondaría US$0,025, pero la resolución, el redondeo de facturación y los cambios de tarifa pueden modificarlo. No es un tope garantizado. Consulta <a href="https://fal.ai/models/fal-ai/flux-1/dev/image-to-image" target="_blank" rel="noopener">el precio oficial</a> y tu saldo antes de usarlo. Esta app no puede imponer un tope de gasto en tu cuenta.</div>
+<div class="grid" style="margin-top:14px">
+<div>
+<div class="field"><label for="imageGenFile">Foto real del producto (JPG, PNG o WebP)</label><input id="imageGenFile" type="file" accept="image/jpeg,image/png,image/webp"><span class="hint">La foto se reduce en tu navegador antes de enviarla. No se guarda en el planificador.</span></div>
+<div class="field"><label for="studioPassword">Contraseña del estudio</label><input id="studioPassword" type="password" autocomplete="current-password" placeholder="Contraseña configurada en Vercel"><span class="hint">No es la clave API. No la guardamos en este navegador.</span></div>
+<div class="field"><label for="imageGenPrompt">Instrucción para la imagen</label><textarea id="imageGenPrompt">Usa la fotografía como referencia principal del paño de limpieza industrial. Conserva el producto, su color, forma, textura, fibras y proporciones; no lo rediseñes. Mejora la iluminación y presenta el mismo paño en un entorno de taller industrial realista, limpio y sobrio, con composición comercial profesional. Sin texto, sin etiquetas inventadas, sin logotipos añadidos y sin propiedades técnicas no verificadas.</textarea></div>
+<div class="field"><label><input id="imageCostConsent" type="checkbox"> Confirmo que revisé el precio y autorizo una generación que puede consumir saldo de fal.ai. Entiendo que el coste final depende del modelo y la resolución.</label></div>
+<div class="toolbar"><button class="btn primary" id="generateMarketingImage" type="button">Generar una imagen IA</button></div>
+<p id="imageGenStatus" class="small" role="status" aria-live="polite">Sin solicitudes activas. No se ha enviado ninguna imagen.</p>
+</div>
+<div>
+<div id="imageGenPreview" class="empty" style="min-height:220px">La vista previa aparecerá aquí cuando selecciones una foto o cuando termine una generación.</div>
+<div id="imageGenResult" style="display:none;margin-top:12px">
+<img id="generatedImage" alt="Imagen generada para revisar" style="width:100%;height:auto;border-radius:12px;border:1px solid var(--line)">
+<div class="toolbar"><a id="downloadGeneratedImage" class="btn dark" target="_blank" rel="noopener">Abrir / guardar imagen</a></div>
+<p class="small">Revisa que el color y la textura del paño sigan siendo fieles al producto real antes de usar esta imagen comercialmente.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section grid">
+<article class="card"><h2>1. Diseñar una campaña</h2><p class="sub">Elige el producto y el objetivo. Se crean propuestas editables usando plantillas locales.</p>
+<div class="field"><label for="product">Producto</label><select id="product"><option>Paños de limpieza nuevos</option><option>Franela de algodón nueva</option><option>Huaipe mecánico de color</option><option>Huaipe mecánico blanco</option><option>Paños no tejidos de celulosa</option><option>Paños de absorción de hidrocarburos</option><option>Paños de limpieza reutilizados</option></select></div>
+<div class="field"><label for="audience">Cliente objetivo</label><select id="audience"><option value="industrial">Empresas industriales y mantenimiento</option><option value="fishing">Pesqueras, frigoríficos y marítimas</option><option value="workshop">Maestranzas y talleres mecánicos</option><option value="wholesale">Distribuidores y compras mayoristas</option><option value="general">Clientes generales y hogar</option></select></div>
+<div class="field"><label for="goal">Objetivo comercial</label><select id="goal"><option value="quote">Generar solicitudes de cotización</option><option value="product">Presentar el producto</option><option value="wholesale">Impulsar compras por volumen</option><option value="education">Educar sobre selección y uso</option><option value="brand">Dar a conocer Igmaustral</option></select></div>
+<div class="field"><label for="channels">Canales a preparar</label><select id="channels"><option value="social">Instagram + Facebook</option><option value="shortvideo">TikTok + Reels</option><option value="b2b">Correo comercial B2B</option><option value="all">Todos los canales</option></select></div>
+<div class="field"><label for="tone">Estilo</label><select id="tone"><option value="professional">Profesional e industrial</option><option value="direct">Directo y comercial</option><option value="educational">Educativo y útil</option></select></div>
+<div class="field"><label for="facts">Datos confirmados del producto (opcional)</label><textarea id="facts" placeholder="Ej.: tamaño 50 x 40 cm, composición confirmada, formato de venta. No incluyas datos que aún no estén verificados."></textarea><span class="hint">No inventaremos precios, certificaciones, rendimientos, disponibilidad ni propiedades técnicas.</span></div>
+<div class="toolbar"><button class="btn primary" id="createCampaign">Crear propuestas</button><button class="btn soft" id="clearForm" type="button">Limpiar campos</button></div></article>
+<article class="card"><h2>2. Producción creativa</h2><p class="sub">Prepara materiales a partir de las propuestas aprobadas.</p>
+<div class="draft"><div class="draft-top"><div><h3>Imágenes de producto</h3><p class="small">Primera etapa: define el brief, usa la foto real como referencia y revisa el resultado antes de publicar.</p></div><span class="pill wait">En planificación</span></div><p>Objetivo visual recomendado: mostrar textura, color y formato del paño sin inventar características. Crear variantes cuadrada 1:1 y vertical 4:5 para redes.</p><div class="toolbar"><button class="btn soft" id="imageBrief">Crear brief de imagen</button><button class="btn soft" id="copyImageBrief">Copiar brief</button></div><textarea id="imageBriefOutput" aria-label="Brief de imagen" placeholder="El brief de imagen aparecerá aquí." readonly></textarea><p class="small">La generación de imágenes mediante un proveedor se conectará después de verificar el coste por generación y el estado de las claves. Este botón no genera ni consume créditos.</p></div>
+<div class="draft"><div class="draft-top"><div><h3>Videos cortos</h3><p class="small">Monta un video desde la foto o abre el flujo de Kling, que puede consumir créditos.</p></div><span class="pill">Revisión manual</span></div><div class="toolbar"><a class="btn dark" href="./estudio-video.html">Abrir estudio de video ↗</a></div><p class="small">Antes de pulsar generar en Kling, confirma que aceptas el posible consumo de créditos. No se inicia ninguna generación desde esta página.</p></div>
+<div class="draft"><div class="draft-top"><div><h3>Control editorial</h3><p class="small">Cada pieza empieza como borrador. Puedes editarla, aprobarla o eliminarla.</p></div><span class="pill approved">Aprobación manual</span></div><p class="small">Los datos de este planificador se guardan en el almacenamiento local de este navegador. No están sincronizados con otros dispositivos ni respaldados en un servidor.</p></div>
+</article></section>
+<section class="section"><div class="draft-top"><div><h2>3. Cola de revisión</h2><p class="sub">Edita el texto, cambia la fecha y aprueba solo cuando esté listo.</p></div><div class="toolbar"><button class="btn soft" id="exportJson">Exportar copia JSON</button><button class="btn soft" id="exportCsv">Exportar CSV</button><button class="btn soft" id="clearDrafts">Borrar borradores</button></div></div><div id="queue" class="queue" style="margin-top:12px"></div><div id="emptyQueue" class="empty" style="margin-top:12px">Todavía no hay borradores. Crea una campaña para generar las primeras propuestas.</div></section>
+<section class="section card"><div class="draft-top"><div><h2>4. Calendario editorial</h2><p class="sub">Vista de los próximos 14 días a partir de hoy. Las fechas se pueden editar en cada borrador.</p></div></div><div id="calendar" class="calendar" style="margin-top:14px"></div></section>
+<section class="section"><h2>Hoja de ruta de construcción</h2><p class="sub">Construiremos por etapas, probando cada una en Preview antes de cualquier cambio en producción.</p><div class="grid">
+<article class="card"><span class="pill approved">Etapa 1 · Incluida en esta versión</span><h3>Planificación sin coste de API</h3><p>Campañas base, borradores editables, cola de revisión, calendario y exportación de datos en el navegador.</p></article>
+<article class="card"><span class="pill wait">Etapa 2 · Siguiente</span><h3>Generación de imágenes con presupuesto visible</h3><p>Conectar un proveedor solo después de verificar precios, límites, saldo y una confirmación antes de cada generación.</p></article>
+<article class="card"><span class="pill wait">Etapa 3 · Después</span><h3>Videos y biblioteca de activos</h3><p>Integrar la generación de video, registrar el coste declarado por tarea y guardar enlaces o archivos aprobados.</p></article>
+<article class="card"><span class="pill wait">Etapa 4 · Con autorización</span><h3>Publicación y métricas</h3><p>Conectar canales oficiales cuando estén disponibles, con vista previa, aprobación humana y botón de publicación explícito.</p></article>
+</div></section>
+<footer>Igmaustral · Centro de marketing IA · Prototipo local sin generación externa ni publicación automática. No almacenes contraseñas ni claves API en este panel.</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const STORAGE_KEY="igmaustralMarketingStudioV1";
+let drafts=[];let lastImageBrief="";
+try{drafts=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");if(!Array.isArray(drafts))drafts=[]}catch(e){drafts=[]}
+const audienceLabels={industrial:"empresas industriales y equipos de mantenimiento",fishing:"pesqueras, frigoríficos y empresas marítimas",workshop:"maestranzas y talleres mecánicos",wholesale:"distribuidores y compradores mayoristas",general:"clientes generales y hogar"};
+const goalLabels={quote:"generar solicitudes de cotización",product:"presentar el producto",wholesale:"promover compras por volumen",education:"orientar sobre la selección del producto",brand:"dar a conocer a Igmaustral"};
+const channelLabels={social:["Instagram","Facebook"],shortvideo:["TikTok","Reels"],b2b:["Correo comercial B2B"],all:["Instagram","Facebook","TikTok","Reels","Correo comercial B2B"]};
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(drafts))}catch(e){alert("No se pudo guardar en este navegador. Exporta una copia JSON para no perder el trabajo.")}render()}
+function dateISO(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function plusDays(n){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return d}
+function createCampaign(){
+ const product=$("product").value,audience=audienceLabels[$("audience").value],goal=goalLabels[$("goal").value],channels=channelLabels[$("channels").value],tone=$("tone").value,facts=$("facts").value.trim();
+ const style=tone==="professional"?"profesional, claro y orientado a operaciones":tone==="direct"?"directo, concreto y comercial":"educativo, útil y sin exageraciones";
+ const safeFact=facts?(" Datos confirmados aportados: "+facts):" Consulta al equipo para confirmar medidas, presentación, disponibilidad y condiciones.";
+ const concepts=[
+  {kind:"Publicación",channel:channels[0],title:"Presentación del producto",text:"¿Tu operación necesita "+product.toLowerCase()+"? En Igmaustral atendemos consultas de "+audience+". Escríbenos para conocer formatos y condiciones comerciales."+safeFact+" Solicita una cotización."},
+  {kind:"Carrusel",channel:channels[Math.min(1,channels.length-1)],title:"Guía para cotizar",text:"Al cotizar "+product.toLowerCase()+", indica el uso previsto, el formato que necesitas y la cantidad estimada. Nuestro equipo puede ayudarte a revisar la alternativa adecuada."+safeFact+" Contáctanos para consultar."},
+  {kind:"Video corto",channel:channels.includes("TikTok")?"TikTok":channels[0],title:"Detalle visual del producto",text:"Muestra una foto real de "+product.toLowerCase()+", un plano cercano de su textura y el formato de venta confirmado. Evita atribuir propiedades técnicas que no estén verificadas. Cierre: solicita información comercial."},
+  {kind:"Correo B2B",channel:"Correo comercial B2B",title:"Contacto a empresas",text:"Hola, ¿cómo están? Les escribo de Igmaustral para presentar nuestra oferta de "+product.toLowerCase()+". Estamos disponibles para revisar sus necesidades de suministro y preparar una cotización según el formato y volumen requerido. Si les interesa, puedo enviar más información. Saludos, Equipo Igmaustral."}
+ ];
+ const chosen=channels.length===1?concepts.filter(x=>x.channel===channels[0]||x.kind==="Publicación").slice(0,3):concepts;
+ chosen.forEach((item,i)=>drafts.unshift({id:(Date.now().toString(36)+Math.random().toString(36).slice(2,7)),product,audience,goal,style,kind:item.kind,channel:item.channel,title:item.title+" · "+product,text:item.text,date:dateISO(plusDays(i*2+1)),status:"Pendiente",facts,created:new Date().toISOString()}));
+ save();
+}
+function render(){
+ $("totalCount").textContent=drafts.length;
+ $("pendingCount").textContent=drafts.filter(d=>d.status==="Pendiente").length;
+ $("approvedCount").textContent=drafts.filter(d=>d.status==="Aprobado").length;
+ $("scheduledCount").textContent=drafts.filter(d=>d.date).length;
+ $("queue").innerHTML="";
+ drafts.forEach(d=>{
+  const el=document.createElement("article");el.className="draft";
+  const top=document.createElement("div");top.className="draft-top";
+  const titleWrap=document.createElement("div");const h=document.createElement("h3");h.textContent=d.title;
+  const meta=document.createElement("p");meta.className="small";meta.textContent=d.kind+" · "+d.channel+" · "+d.product;titleWrap.append(h,meta);
+  const badge=document.createElement("span");badge.className="pill "+(d.status==="Aprobado"?"approved":"wait");badge.textContent=d.status;top.append(titleWrap,badge);el.append(top);
+  const text=document.createElement("textarea");text.value=d.text;text.setAttribute("aria-label","Texto del borrador "+d.title);text.addEventListener("change",()=>{d.text=text.value;save()});el.append(text);
+  const controls=document.createElement("div");controls.className="grid";controls.style.gridTemplateColumns="repeat(auto-fit,minmax(150px,1fr))";controls.style.marginTop="9px";
+  const dateWrap=document.createElement("div");dateWrap.className="field";dateWrap.style.margin="0";const dateLabel=document.createElement("label");dateLabel.textContent="Fecha planificada";const date=document.createElement("input");date.type="date";date.value=d.date||"";date.addEventListener("change",()=>{d.date=date.value;save()});dateWrap.append(dateLabel,date);
+  const channelWrap=document.createElement("div");channelWrap.className="field";channelWrap.style.margin="0";const channelLabel=document.createElement("label");channelLabel.textContent="Canal";const channel=document.createElement("select");["Instagram","Facebook","TikTok","Reels","Correo comercial B2B","Web / SEO"].forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;channel.append(o)});channel.value=channel.options.namedItem?d.channel:d.channel;if(!Array.from(channel.options).some(o=>o.value===d.channel)){const o=document.createElement("option");o.value=d.channel;o.textContent=d.channel;channel.append(o)}channel.value=d.channel;channel.addEventListener("change",()=>{d.channel=channel.value;save()});channelWrap.append(channelLabel,channel);
+  controls.append(dateWrap,channelWrap);el.append(controls);
+  const actions=document.createElement("div");actions.className="toolbar";
+  const approve=document.createElement("button");approve.className="btn "+(d.status==="Aprobado"?"soft":"primary");approve.textContent=d.status==="Aprobado"?"Quitar aprobación":"Aprobar borrador";approve.addEventListener("click",()=>{d.status=d.status==="Aprobado"?"Pendiente":"Aprobado";save()});
+  const copy=document.createElement("button");copy.className="btn soft";copy.textContent="Copiar texto";copy.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(d.text);copy.textContent="Copiado"}catch(e){text.focus();text.select();copy.textContent="Seleccionado para copiar"}});
+  const remove=document.createElement("button");remove.className="btn soft";remove.textContent="Eliminar";remove.addEventListener("click",()=>{if(confirm("¿Eliminar este borrador?")){drafts=drafts.filter(x=>x.id!==d.id);save()}});
+  actions.append(approve,copy,remove);el.append(actions);$("queue").append(el);
+ });
+ $("emptyQueue").hidden=drafts.length>0;renderCalendar();
+}
+function renderCalendar(){
+ const root=$("calendar");root.innerHTML="";const dayNames=["dom","lun","mar","mié","jue","vie","sáb"];
+ for(let i=0;i<14;i++){const d=plusDays(i),iso=dateISO(d),el=document.createElement("div");el.className="day";const h=document.createElement("strong");h.textContent=dayNames[d.getDay()]+" "+d.getDate()+"/"+(d.getMonth()+1);const small=document.createElement("small");small.textContent=i===0?"Hoy":i===1?"Mañana":"Día +"+i;el.append(h,small);drafts.filter(x=>x.date===iso).forEach(x=>{const e=document.createElement("span");e.className="event";e.textContent=x.title;e.title=x.channel+" · "+x.status;el.append(e)});root.append(el)}
+}
+function makeImageBrief(){lastImageBrief="BRIEF VISUAL · IGMAUSTRAL\nProducto: "+$("product").value+"\nObjetivo: "+goalLabels[$("goal").value]+"\nAudiencia: "+audienceLabels[$("audience").value]+"\n\nUsar la fotografía real cargada por el usuario como referencia principal. Mantener el color, textura, forma y proporciones del producto lo más fiel posible. Estética comercial profesional, iluminación limpia, entorno de taller industrial realista y sobrio, fondo ordenado sin efectos futuristas. Composición cuadrada 1:1 y variante vertical 4:5. No inventar etiquetas, logotipos, medidas, certificaciones ni texto dentro de la imagen. No alterar el producto ni añadir afirmaciones técnicas.\nDatos confirmados: "+($("facts").value.trim()||"Pendiente de completar; no añadir datos técnicos.")+"\nRevisar fidelidad del producto antes de aprobar."; $("imageBriefOutput").value=lastImageBrief}
+$("createCampaign").addEventListener("click",createCampaign);
+$("clearForm").addEventListener("click",()=>{$("product").selectedIndex=0;$("audience").selectedIndex=0;$("goal").selectedIndex=0;$("channels").selectedIndex=0;$("tone").selectedIndex=0;$("facts").value=""});
+$("imageBrief").addEventListener("click",makeImageBrief);
+$("copyImageBrief").addEventListener("click",async()=>{if(!$("imageBriefOutput").value)makeImageBrief();try{await navigator.clipboard.writeText($("imageBriefOutput").value);$("copyImageBrief").textContent="Brief copiado"}catch(e){$("imageBriefOutput").focus();$("imageBriefOutput").select()}});
+$("clearDrafts").addEventListener("click",()=>{if(confirm("¿Borrar todos los borradores guardados en este navegador? Exporta una copia si deseas conservarlos.")){drafts=[];save()}});
+$("exportJson").addEventListener("click",()=>download("igmaustral-borradores.json",JSON.stringify({exportedAt:new Date().toISOString(),drafts},null,2),"application/json"));
+function buildCsv(items=drafts){const cols=["title","product","kind","channel","date","status","text"];const esc=v=>'"'+String(v??"").replace(/"/g,'""')+'"';return [cols.join(","),...items.map(d=>cols.map(k=>esc(d[k])).join(","))].join("\r\n")}
+$("exportCsv").addEventListener("click",()=>download("igmaustral-calendario.csv","\ufeff"+buildCsv(),"text/csv;charset=utf-8"));
+function download(name,content,type){const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+
+async function runDiagnostics(){
+ const results=[];
+ const check=(name,ok,detail="")=>results.push({name,ok:Boolean(ok),detail});
+ const originalDrafts=drafts.map(d=>({...d}));
+ let originalStorage=null,hadStorage=false;
+ try{originalStorage=localStorage.getItem(STORAGE_KEY);hadStorage=originalStorage!==null}catch(e){}
+ try{
+  drafts=originalDrafts.map(d=>({...d}));
+  $("product").value="Paños de limpieza nuevos";
+  $("audience").value="industrial";
+  $("goal").value="quote";
+  $("channels").value="social";
+  $("tone").value="professional";
+  $("facts").value="Prueba de diagnóstico; no usar como dato comercial.";
+  const before=drafts.length;
+  $("createCampaign").click();
+  check("Crear campaña",drafts.length>before&&drafts.some(d=>d.product==="Paños de limpieza nuevos"),"Se crearon borradores de prueba.");
+  const testDraft=drafts[0];
+  if(testDraft){
+   testDraft.text="Texto de prueba editado";
+   save();
+   check("Editar borrador",drafts.some(d=>d.id===testDraft.id&&d.text==="Texto de prueba editado"),"El texto editado queda en el borrador.");
+   testDraft.status="Aprobado";save();
+   check("Aprobar borrador",drafts.some(d=>d.id===testDraft.id&&d.status==="Aprobado"),"El estado de aprobación se guarda.");
+   testDraft.date=dateISO(plusDays(3));save();
+   const dayHasEvent=Array.from($("calendar").querySelectorAll(".day")).some(day=>day.textContent.includes(testDraft.title));
+   check("Fecha y calendario",testDraft.date===dateISO(plusDays(3))&&dayHasEvent,"La fecha planificada aparece en el calendario de 14 días.");
+  }else{
+   check("Editar borrador",false,"No se encontró el borrador de prueba.");
+   check("Aprobar borrador",false,"No se encontró el borrador de prueba.");
+   check("Fecha y calendario",false,"No se encontró el borrador de prueba.");
+  }
+  const csv=buildCsv(drafts);
+  check("Exportar CSV",csv.startsWith('"title","product","kind","channel","date","status","text"')&&csv.includes("Texto de prueba editado"),"El contenido CSV se genera correctamente; no se descarga ningún archivo durante esta prueba.");
+  const persisted=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+  check("Persistencia local",Array.isArray(persisted)&&persisted.some(d=>d.id===testDraft?.id),"Los borradores se serializan en el almacenamiento local del navegador.");
+ }catch(e){
+  check("Error del autodiagnóstico",false,String(e&&e.message||e));
+ }finally{
+  drafts=originalDrafts;
+  try{if(hadStorage)localStorage.setItem(STORAGE_KEY,originalStorage);else localStorage.removeItem(STORAGE_KEY)}catch(e){}
+  render();
+  $("facts").value="";
+ }
+ const passed=results.filter(r=>r.ok).length;
+ $("diagnosticResults").className=passed===results.length?"empty":"notice";
+ $("diagnosticResults").innerHTML="<strong>Resultado: "+passed+"/"+results.length+" pruebas correctas</strong><ul>"+results.map(r=>"<li>"+(r.ok?"✓ ":"✗ ")+r.name+(r.detail?" — "+r.detail:"")+"</li>").join("")+"</ul><p class='small'>Las pruebas son locales y temporales. No se hizo ninguna llamada a un proveedor de IA.</p>";
+}
+
+let imageGenFileData=null;
+$("imageGenFile").addEventListener("change",async()=>{
+ const file=$("imageGenFile").files?.[0];
+ imageGenFileData=null;
+ $("imageGenResult").style.display="none";
+ if(!file){$("imageGenStatus").textContent="Sin fotografía seleccionada.";return}
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)){ $("imageGenStatus").textContent="Formato no compatible. Usa JPG, PNG o WebP.";return}
+ if(file.size>15*1024*1024){$("imageGenStatus").textContent="La foto original supera 15 MB. Elige una foto más pequeña.";return}
+ try{
+  const dataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error("No se pudo leer la fotografía."));reader.readAsDataURL(file)});
+  const img=await new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error("La fotografía no se pudo abrir."));im.src=dataUrl});
+  const scale=Math.min(1,1280/Math.max(img.naturalWidth,img.naturalHeight));
+  const canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));
+  const ctx=canvas.getContext("2d");ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  imageGenFileData=canvas.toDataURL("image/jpeg",0.82);
+  if(imageGenFileData.length>3_700_000){imageGenFileData=canvas.toDataURL("image/jpeg",0.68)}
+  $("imageGenPreview").innerHTML="";const preview=document.createElement("img");preview.src=imageGenFileData;preview.alt="Fotografía de referencia";preview.style.cssText="width:100%;height:auto;border-radius:10px";$("imageGenPreview").append(preview);
+  $("imageGenStatus").textContent="Foto preparada ("+canvas.width+" × "+canvas.height+"). No se ha enviado ni generado nada.";
+ }catch(e){imageGenFileData=null;$("imageGenStatus").textContent=e.message||"No se pudo preparar la fotografía."}
+});
+$("generateMarketingImage").addEventListener("click",async()=>{
+ if(!imageGenFileData){$("imageGenStatus").textContent="Primero selecciona una foto del producto.";return}
+ const password=$("studioPassword").value;
+ if(!password){$("imageGenStatus").textContent="Introduce la contraseña del estudio configurada en Vercel.";return}
+ if(!$("imageCostConsent").checked){$("imageGenStatus").textContent="Para continuar debes confirmar que revisaste el precio y autorizas esta generación.";return}
+ const button=$("generateMarketingImage");
+ button.disabled=true;
+ let requestId=null;
+ try{
+  $("imageGenStatus").textContent="Enviando una única solicitud al proveedor…";
+  const response=await fetch("/api/generate-marketing-image",{method:"POST",headers:{"Content-Type":"application/json","x-studio-password":password},body:JSON.stringify({imageData:imageGenFileData,prompt:$("imageGenPrompt").value,costConfirmed:true})});
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(data.error||"No se pudo iniciar la generación.");
+  requestId=data.requestId;
+  if(!requestId)throw new Error("El proveedor no devolvió un identificador. No vuelvas a generar sin revisar el estado del proveedor.");
+  $("imageGenStatus").textContent="Solicitud enviada. Consultando el estado; no se volverá a enviar la generación automáticamente…";
+  for(let i=0;i<60;i++){
+   await new Promise(resolve=>setTimeout(resolve,4000));
+   const statusResponse=await fetch("/api/marketing-image-status?requestId="+encodeURIComponent(requestId),{headers:{"x-studio-password":password,"Cache-Control":"no-store"}});
+   const statusData=await statusResponse.json().catch(()=>({}));
+   if(!statusResponse.ok)throw new Error(statusData.error||"No se pudo consultar el estado. Revisa el panel del proveedor antes de repetir.");
+   if(statusData.status==="COMPLETED"&&statusData.url){
+    $("generatedImage").src=statusData.url;
+    $("downloadGeneratedImage").href=statusData.url;
+    $("imageGenResult").style.display="block";
+    $("imageGenStatus").textContent="Imagen lista. Revisa la fidelidad del producto antes de aprobarla.";
+    $("imageGenPreview").textContent="Foto de referencia enviada.";
+    return;
+   }
+   if(statusData.status==="FAILED")throw new Error(statusData.error||"La generación falló. Revisa el panel del proveedor antes de repetir.");
+   $("imageGenStatus").textContent="Generación en curso ("+(i+1)+"/60). Estado: "+(statusData.status||"procesando")+".";
+  }
+  $("imageGenStatus").textContent="La solicitud sigue sin resultado visible. No pulses generar de nuevo todavía; revisa la solicitud en fal.ai.";
+ }catch(e){
+  $("imageGenStatus").textContent=(e.message||"Ocurrió un error.")+(requestId?" ID de solicitud: "+requestId+". No se envió otra generación.":"");
+ }finally{button.disabled=false}
+});
+
+$("runDiagnostics").addEventListener("click",runDiagnostics);
+render();
+</script></body></html>
